@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import '../../../../widgets/attraction_item.dart';
+import '../../../../widgets/error_display.dart';
+import '../../../../widgets/no_data_display.dart';
 import '../../domain/usecases/get_attractions.dart';
 import '../bloc/attraction_bloc.dart';
 
@@ -23,20 +26,15 @@ class AttractionPage extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final attraction = state.attractions[index];
                   if (attraction.isVisible) {
-                    return ListTile(
-                      leading: Image.network(attraction.imageUrl),
-                      title: Text(attraction.name),
-                      subtitle: Text(attraction.address),
-                    );
+                    return AttractionItem(attraction: attraction);
                   }
-
                   return const SizedBox.shrink();
                 },
               );
             } else if (state is AttractionError) {
-              return Center(child: Text('Error: ${state.message}'));
+              return ErrorDisplay(message: state.message);
             } else {
-              return const Center(child: Text('No data'));
+              return const NoDataDisplay();
             }
           },
         ),

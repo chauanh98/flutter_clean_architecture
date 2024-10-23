@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:flutter_clean_architecture/features/attraction/domain/entities/attraction.dart';
 
